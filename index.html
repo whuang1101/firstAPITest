@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <img src="#">
+  <input type="text" class="new-search">
+  <button class="new">New images</button>
+
+  <script>
+    const img = document.querySelector('img');
+    let search = "taylor";
+    fetch(`https://api.giphy.com/v1/gifs/translate?api_key=vukeRA2WHlv2sQaOAC10Lv51OhtCL7ZN&s=${search}`, {mode: 'cors'})
+    .then(function(response) {
+        return response.json();
+      })
+      .then(function(response) {
+        img.src = response.data.images.original.url;
+      })
+      .catch(function(error) {
+    console.error("Error:", error);
+      });
+      const newImage = document.querySelector(".new");
+      const newSearch = document.querySelector(".new-search");
+      newImage.addEventListener("click", () => {
+        console.log(newSearch.value);
+        search = newSearch.value;
+        fetch(`https://api.giphy.com/v1/gifs/translate?api_key=vukeRA2WHlv2sQaOAC10Lv51OhtCL7ZN&s=${search}`, {mode: 'cors'})
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(response) {
+        img.src = response.data.images.original.url;
+      })
+      .catch(function(error) {
+        console.error("Error:", error);
+        })
+      ;
+      })
+  </script>
+  
+</body>
+</html>
